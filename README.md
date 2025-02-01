@@ -364,7 +364,8 @@ plt.show()
 
 
     
-![png](output_7_0.png)
+![output_7_0](https://github.com/user-attachments/assets/77157e42-758b-4242-9f82-48844d61e748)
+
     
 
 
@@ -378,7 +379,8 @@ plt.show()
 
 
     
-![png](output_8_0.png)
+![output_8_0](https://github.com/user-attachments/assets/752f71e2-6516-458e-b3f8-b3d759b797f6)
+
     
 
 
@@ -416,7 +418,8 @@ plt.show()
 
 
     
-![png](output_10_0.png)
+![output_10_0](https://github.com/user-attachments/assets/12c9b3c7-b1cb-4d88-ba2d-743c6d453169)
+
     
 
 
@@ -442,7 +445,8 @@ plt.show()
 
 
     
-![png](output_11_0.png)
+![output_11_0](https://github.com/user-attachments/assets/7a526511-1807-46d2-a195-1dee04f67a26)
+
     
 
 
@@ -466,13 +470,15 @@ plt.show()
 
 
     
-![png](output_12_0.png)
-    
-
-
+![output_12_0](https://github.com/user-attachments/assets/bfdb8904-b4df-40c0-a7f5-f83a6613a834)
 
     
-![png](output_12_1.png)
+
+
+
+    
+![output_12_1](https://github.com/user-attachments/assets/5144b1de-10f2-4853-81ba-d81f5fd37f2f)
+
     
 
 
@@ -503,7 +509,8 @@ plt.ylabel('Percent')
 
 
     
-![png](output_13_1.png)
+![output_13_1](https://github.com/user-attachments/assets/b8a9767a-f481-4e3c-b01b-171ba2f498f2)
+
     
 
 
@@ -529,9 +536,10 @@ plt.show()
 ```
 
 
+
     
-![png](output_14_0.png)
-    
+![output_14_0](https://github.com/user-attachments/assets/93c8fe64-a4f1-486e-a6b7-e265c8ffcd14)
+
 
 
 
@@ -562,8 +570,9 @@ plt.show()
 
 
     
-![png](output_15_0.png)
-    
+
+![output_15_0](https://github.com/user-attachments/assets/05b13982-8f55-4a22-8aee-a388b89b5e33)
+
 
 
 
@@ -597,8 +606,9 @@ plt.show()
 
 
     
-![png](output_16_0.png)
-    
+
+![output_16_0](https://github.com/user-attachments/assets/703be653-be37-4627-b97b-9a0fee632f9f)
+
 
 
 
@@ -779,8 +789,10 @@ plt.show()
 ```
 
 
-    
-![png](output_21_0.png)
+
+
+![output_21_0](https://github.com/user-attachments/assets/b50c446f-3195-41f3-bda1-81aef5057a12)
+
     
 
 
@@ -828,8 +840,9 @@ plt.show()
 
 
     
-![png](output_25_0.png)
-    
+
+![output_25_0](https://github.com/user-attachments/assets/1382254e-8737-4d31-94cb-2f4a43984e9f)
+ 
 
 
 
