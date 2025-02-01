@@ -11,7 +11,7 @@ For this deliverable, you are asked to choose a method to approach this data cha
 <h2>Data Source</h2>
 https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction/code?datasetId=1409252&sortBy=voteCount
 
-<\br>
+<br>
 
 ## Exploratory Data Analysis
 
