@@ -11,6 +11,10 @@ For this deliverable, you are asked to choose a method to approach this data cha
 <h2>Data Source</h2>
 https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction/code?datasetId=1409252&sortBy=voteCount
 
+<\br>
+
+## Exploratory Data Analysis
+
 ```python
 import numpy as np
 import pandas as pd
@@ -861,10 +865,3 @@ print(classification_rep)
                      accuracy                           0.49       937
                     macro avg       0.49      0.49      0.48       937
                  weighted avg       0.49      0.49      0.48       937
-    
-    
-
-
-```python
-
-```
