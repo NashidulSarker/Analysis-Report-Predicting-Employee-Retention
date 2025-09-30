@@ -1,40 +1,10 @@
----
-jupyter:
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.11.7
-  nbformat: 4
-  nbformat_minor: 5
----
-
-::: {#af3cff29-d682-49dc-9495-a2388175a503 .cell .markdown}
 # Analysis Report: Employee Attrition in HR Dataset
 
 ## Introduction
 
-Employee attrition, also known as turnover, is a critical concern for
-companies seeking to maintain productivity and reduce recruitment costs.
-The dataset provided contains records of employees, their work-related
-characteristics, and whether they left the company (indicated by the
-`left` variable). By exploring the factors influencing employee
-attrition, this analysis aims to identify key drivers of turnover and
-offer actionable insights for the senior leadership team.
+Employee attrition, also known as turnover, is a critical concern for companies seeking to maintain productivity and reduce recruitment costs. The dataset provided contains records of employees, their work-related characteristics, and whether they left the company (indicated by the `left` variable). By exploring the factors influencing employee attrition, this analysis aims to identify key drivers of turnover and offer actionable insights for the senior leadership team.
 
-The analysis leverages several logistic regression, machine learning and
-data visualization techniques to uncover patterns in the data and build
-a predictive model for employee churn.
-:::
+The analysis leverages several logistic regression, machine learning and data visualization techniques to uncover patterns in the data and build a predictive model for employee churn.
 
 ::: {#68dd27af-e45e-42f5-835e-802db0a7cd40 .cell .markdown}
 ##### Import packages
