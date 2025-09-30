@@ -1,3 +1,4 @@
+
 # Analysis Report: Employee Attrition in HR Dataset
 
 ## Introduction
@@ -56,19 +57,6 @@ df0.head()
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -156,27 +144,11 @@ df0.head()
 </div>
 
 #### Overview Of The Dataset
-
 ``` python
 df0.describe()
 ```
 
-::: {.output .execute_result execution_count="7"}
-```{=html}
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -283,11 +255,7 @@ df0.describe()
   </tbody>
 </table>
 </div>
-```
-:::
-:::
 
-::: {#03b0e16e-7d73-4d48-b941-f58f4e282633 .cell .markdown}
 ### Key Statistics
 
 Upon initial inspection, the following trends were observed:
@@ -301,10 +269,8 @@ Upon initial inspection, the following trends were observed:
 -   **Working Hours**: Average monthly hours worked shows a wide range,
     with potential outliers. Some employees who left the company worked
     significantly more hours, indicating possible burnout.
-:::
 
-::: {#a470b3a6-03ff-4fb4-b471-9dbe962839e6 .cell .markdown}
-## Data Cleaning and Preparation
+# Data Cleaning and Preparation
 
 To prepare the data for modeling, the following steps were taken:
 
@@ -312,18 +278,13 @@ To prepare the data for modeling, the following steps were taken:
 -   **Checked And Removed Dulicate Values**
 -   **Changed \'Department\' and \'salary\' Column Type From Object To
     Categorical**
-:::
 
-::: {#8a7a1517-87be-4f2a-b3e7-7e77aa605fad .cell .markdown}
 #### Checking For Null Values
-:::
 
-::: {#2bb0af17-65db-4b16-88eb-1b9995f48911 .cell .code execution_count="11"}
 ``` python
 df0.info()
 ```
 
-::: {.output .stream .stdout}
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 14999 entries, 0 to 14998
     Data columns (total 10 columns):
@@ -341,51 +302,30 @@ df0.info()
      9   salary                 14999 non-null  object 
     dtypes: float64(2), int64(6), object(2)
     memory usage: 1.1+ MB
-:::
-:::
 
-::: {#05a12233-8123-4e5b-a3b8-f15bbc6c11e0 .cell .markdown}
 #### Checking For Total Number of Duplicate Values
-:::
 
-::: {#c8b0dfc4-336b-479d-9983-2d62c7d0502f .cell .code execution_count="13"}
 ``` python
 df0.duplicated().sum()
 ```
-
-::: {.output .execute_result execution_count="13"}
     3008
-:::
-:::
 
-::: {#26512046-148b-4c08-8a67-10ae68417988 .cell .markdown}
 #### Droping All Duplicates
-:::
 
-::: {#8866f86e-98a3-41e4-9aa5-262d75aaa66c .cell .code execution_count="15"}
 ``` python
 df0.drop_duplicates(inplace=True)
 df0.duplicated().any()
 ```
-
-::: {.output .execute_result execution_count="15"}
     False
-:::
-:::
 
-::: {#1a8ab9fc-4f33-44cd-9fc7-2ac2565f08b0 .cell .markdown}
 #### Changing Column Type From Object To Categorical
-:::
 
-::: {#070b0a2b-8b43-44fd-8b8d-acc27394cd63 .cell .code execution_count="17"}
 ``` python
 df0['Department'] = df0['Department'].astype('category')
 df0['salary'] = df0['salary'].astype('category')
 df0.rename(columns={'average_montly_hours': 'average_monthly_hours'}, inplace=True)
 df0.info()
 ```
-
-::: {.output .stream .stdout}
     <class 'pandas.core.frame.DataFrame'>
     Index: 11991 entries, 0 to 11999
     Data columns (total 10 columns):
@@ -403,16 +343,11 @@ df0.info()
      9   salary                 11991 non-null  category
     dtypes: category(2), float64(2), int64(6)
     memory usage: 867.0 KB
-:::
-:::
 
-::: {#ee17c9fd-880b-4357-9bf9-5f58045b1dfc .cell .markdown}
 ### Boxplot
 
 Using boxplot to find outliers in the dataset.
-:::
 
-::: {#7b56ca6d-1688-4afd-9404-308d5b36dd44 .cell .code execution_count="19"}
 ``` python
 for_plotting = df0.drop(['salary', 'Department','promotion_last_5years', 'left','Work_accident'], axis=1)
 
@@ -431,41 +366,27 @@ plt.subplots_adjust(wspace=0.4, hspace=0.4)
 
 plt.show()
 ```
+<img width="976" height="699" alt="8b6d13147cfa7eb8548d40d5755548574738165c" src="https://github.com/user-attachments/assets/79416b65-eb9b-486e-99d8-5c70a9da8e82" />
 
-::: {.output .display_data}
-![](8b6d13147cfa7eb8548d40d5755548574738165c.png)
-:::
-:::
-
-::: {#3882c28e-8fd2-47cd-a7a3-bc0e4dcc9341 .cell .markdown}
 We can observe from the above figuers there are outliers in the
 \'time_spent_company\' column of the dataset. In a regression model
 outliers can skew the model\'s understanding of the relationship between
 variables, leading to inaccurate parameter estimates. But in some
 Machine Learning algorithm like the Random Forest Algorithm outliers
 have less impact.
-:::
 
-::: {#4a798b0c-bf50-402f-97e1-e42504528326 .cell .markdown}
 ### Pie Chart
 
 Using pie chart to check the balance of the dataset.
-:::
 
-::: {#c92214ed-1e20-40cb-ae5c-39b8171c3dee .cell .code execution_count="22"}
 ``` python
 labels = ['Did Not Leave', 'Left']
 df0.groupby('left').size().plot(kind='pie', labels=labels, autopct='%1.1f%%', ylabel='', colors=['#51BAFF', '#00FFA2'])
 
 plt.show()
 ```
+<img width="443" height="389" alt="fc325df7c1392425d6dc3236c4e3e6a761a8eb21" src="https://github.com/user-attachments/assets/1b9d7f5b-ba19-4ab2-b215-afa7604b3ab2" />
 
-::: {.output .display_data}
-![](fc325df7c1392425d6dc3236c4e3e6a761a8eb21.png)
-:::
-:::
-
-::: {#2e0b951b-c2a0-4878-8afa-f31bc32f0bc1 .cell .markdown}
 The above figure shows that the class distribution indicates that our
 target class is imbalanced, as there is a large discrepancy in the
 number of observations between the classes.
@@ -475,18 +396,14 @@ data. Because they strive for general accuracy, regression and machine
 learning models are prone to bias toward the majority. This means they
 may perform poorly on the minority class, thus leading to an incorrect
 prediction model.
-:::
 
-::: {#e9c1a3fb-f376-42c0-a159-802fdc46173c .cell .markdown}
 ## Exploratory Data Analysis (EDA)
 
 ### Histogram
 
 Histogram to show salary distribution of employees and salary
 distribution of employees who left or did not leave.
-:::
 
-::: {#8aadf110-c294-4dfe-94f2-07a52f310ba6 .cell .code execution_count="25"}
 ``` python
 plt.figure(figsize=(24, 8))
 
@@ -505,18 +422,11 @@ plt.ylabel('Percent')
 
 plt.show()
 ```
+<img width="1927" height="699" alt="de32b0a978f6eb93d709fdc17eed2c05674d5be9" src="https://github.com/user-attachments/assets/58ebedc4-3994-43ca-b2db-1099054489fe" />
 
-::: {.output .display_data}
-![](de32b0a978f6eb93d709fdc17eed2c05674d5be9.png)
-:::
-:::
-
-::: {#18b5e749-028a-440e-a7ad-97a15d7bab44 .cell .markdown}
 **Histogram Of Different Departments In The Company And Distribution of
 Different Departments for Employees Who Left and Did Not Leave**
-:::
 
-::: {#2d8b177e-cb65-438c-81d7-776d35257e02 .cell .code execution_count="27"}
 ``` python
 plt.figure(figsize=(14, 6))
 sns.histplot(data=df0, x='Department', shrink=.8, stat='percent')
@@ -533,26 +443,17 @@ plt.ylabel('Percent')
 
 plt.show()
 ```
+<img width="1152" height="545" alt="ae638346015281a716d2970be1787e6515c19628" src="https://github.com/user-attachments/assets/a22246d0-2481-4b1e-b490-61051b8ca7b7" />
 
-::: {.output .display_data}
-![](ae638346015281a716d2970be1787e6515c19628.png)
-:::
+<img width="1152" height="545" alt="9584e99fe39b9b6a0ff53d6ffa5530e4043fd22f" src="https://github.com/user-attachments/assets/1d2c3b41-ceee-474f-a9e3-673b33314823" />
 
-::: {.output .display_data}
-![](9584e99fe39b9b6a0ff53d6ffa5530e4043fd22f.png)
-:::
-:::
-
-::: {#aa8a05fd-48ea-4521-95a8-b2414f46a313 .cell .markdown}
 #### Polygraph
 
 Polygraph to show distribution of last evaluation for employees who left
 or did not leave, distribution of average monthly hours for employees
 who left or did not leave, and distribution of satisfaction level for
 employees who left or did not leave
-:::
 
-::: {#a9cb27c7-d324-4920-988f-b3efacea542d .cell .code execution_count="29"}
 ``` python
 plt.figure(figsize=(14, 12))
 
@@ -580,21 +481,14 @@ plt.ylabel('Percent')
 plt.tight_layout()
 plt.show()
 ```
+<img width="1390" height="1190" alt="ad83aa2c32e0258d4a070a5af4541f730b671a17" src="https://github.com/user-attachments/assets/19129947-9b93-4f67-b74c-693cd5a07f3e" />
 
-::: {.output .display_data}
-![](ad83aa2c32e0258d4a070a5af4541f730b671a17.png)
-:::
-:::
-
-::: {#0c61d345-59de-4fc9-b612-bd1eac13a5b7 .cell .markdown}
 ### Heatmap
 
 Using a heatmap to compare the number of employees who left with those
 who had a work accident and with those who received promotions during
 the previous five years
-:::
 
-::: {#27bc33ac-148d-4df0-abde-fb15ac81bbed .cell .code execution_count="31"}
 ``` python
 plt.figure(figsize=(14, 6))
 comparison_summary = df0.groupby(['left', 'Work_accident']).size().unstack()
@@ -619,21 +513,14 @@ plt.yticks([0.5, 1.5], ['Stayed', 'Left'], rotation=0)
 
 plt.show()
 ```
+<img width="1177" height="563" alt="24caf2f29e830203f540a2b41cadbd00aa329505" src="https://github.com/user-attachments/assets/2c75b0a7-b9fd-4a2f-8e6f-b6275ca5bf41" />
 
-::: {.output .display_data}
-![](24caf2f29e830203f540a2b41cadbd00aa329505.png)
-:::
-:::
-
-::: {#c9d97489-84d4-4666-9f66-9938a076cc6e .cell .markdown}
-#### Histogram {#histogram}
+#### Histogram
 
 Histogram to show distribution of number of projects for employees who
 left or did not leave and distribution of time spent at the company for
 employees who left or did not leave
-:::
 
-::: {#7af03e47-49f9-4468-aed1-059a8b019e77 .cell .code execution_count="33"}
 ``` python
 plt.figure(figsize=(14, 6))
 
@@ -657,15 +544,9 @@ plt.ylabel('Percent')
 
 plt.show()
 ```
+<img width="1152" height="563" alt="38f7b2560e885f71e643b600081cc78967c491a7" src="https://github.com/user-attachments/assets/8eb89288-46c3-454b-8307-46cf3f34b41a" />
 
-::: {.output .display_data}
-![](38f7b2560e885f71e643b600081cc78967c491a7.png)
-:::
-:::
-
-::: {#a2de3571-e444-499c-ad63-189791d45de8 .cell .markdown}
 ### Visualization Insights
-
 The analysis includes a variety of visualizations to better understand
 the relationships between features and attrition:
 
@@ -707,9 +588,7 @@ the relationships between features and attrition:
 3.  **No Promotions contributes to employee turnover**: Long-standing
     employees who have not received promotions are choosing to leave the
     company.
-:::
 
-::: {#3b5f691f-3de4-4b18-b7bc-150a12240266 .cell .markdown}
 ## Modeling Approach
 
 ### Model Selection
@@ -724,9 +603,7 @@ impact of each feature on the likelihood of attrition.
 
 We are using `LabelEncoder()` to convert categorical variables into
 numerical form and VIF to measure multicollinearity among the variables.
-:::
 
-::: {#3f44eb35-db85-4878-8157-70e14227640b .cell .code execution_count="36"}
 ``` python
 label_encoder = LabelEncoder()
 df0_outliers['salary'] = label_encoder.fit_transform(df0_outliers['salary'])
@@ -740,9 +617,6 @@ vif_data['VIF'] = [variance_inflation_factor(features.values, i) for i in range(
 
 vif_data
 ```
-
-::: {.output .execute_result execution_count="36"}
-```{=html}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -804,25 +678,17 @@ vif_data
   </tbody>
 </table>
 </div>
-```
-:::
-:::
 
-::: {#9e662e5c-c0de-4362-8940-e456a0137a34 .cell .markdown}
 **Comment**: There is high multicollinearity among the variables
 `last_evaluation`, `number_project`, `average_monthly_hours` and
 `time_spend_company`. We need to drop them before we train our
 regression model.
-:::
 
-::: {#350490b7-f518-4319-a129-ecfe856ebb75 .cell .markdown}
 ### Preparation
 
 Declaring our dependent and independent variables. Dropping variables
 with high VIF score and low correlation with the dependent variable.
-:::
 
-::: {#2d6c3f6c-94a2-43cd-9130-904b97ac0bd8 .cell .code execution_count="39"}
 ``` python
 df_logreg = df0_outliers.copy()
 
@@ -832,8 +698,6 @@ X = df_logreg.drop(columns=['last_evaluation', 'number_project', 'average_monthl
 X.head()
 ```
 
-::: {.output .execute_result execution_count="39"}
-```{=html}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -891,48 +755,32 @@ X.head()
   </tbody>
 </table>
 </div>
-```
-:::
-:::
 
-::: {#59ee28e9-b8e6-426b-964a-866c988effd2 .cell .markdown}
 ### Train-Test Split
 
 The dataset was split into training and testing sets to ensure robust
 model evaluation. We are using 75% of the data for training and 25% for
 testing. After that we will use or test data set to see how our model
 performs.
-:::
-
-::: {#3863ea40-8e02-4b02-912e-97e3a651a2c9 .cell .code execution_count="41"}
 ``` python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y)
 logr = LogisticRegression(max_iter=500).fit(X_train, y_train)
 y_pred = logr.predict(X_test)
 ```
-:::
 
-::: {#4af24387-d791-4ab7-a651-b2f284017c9c .cell .markdown}
 ### Confusion Matrix
 
 Confusion Matrix can help visualize how well the model differentiates
 between employees who stayed and those who left.
-:::
 
-::: {#3c92a99a-6d6c-4855-96e5-461d3bb236a1 .cell .code execution_count="43"}
 ``` python
 log_cm = confusion_matrix(y_test, y_pred, labels=logr.classes_)
 ConfusionMatrixDisplay(confusion_matrix=log_cm, display_labels=logr.classes_).plot(values_format='')
 
 plt.show()
 ```
+<img width="516" height="438" alt="dc872e5e910df27dfd9a1e026929b2fedf3d1dd8" src="https://github.com/user-attachments/assets/60e01160-4748-4218-9007-35c6d9d6940f" />
 
-::: {.output .display_data}
-![](dc872e5e910df27dfd9a1e026929b2fedf3d1dd8.png)
-:::
-:::
-
-::: {#fdc131b2-2b6b-44cc-8bf5-61ff80550e23 .cell .markdown}
 **True Positive:** 2246
 **False Negative:** 75
 **False Positive:** 359
@@ -941,13 +789,9 @@ plt.show()
 We can see from the confusion matrix above that our logistic regression
 model performed poorly in predicting true negatives from our test data.
 We will use the classification report to gain more insights.
-:::
 
-::: {#cfc42ba6-f26a-4f86-a7ef-eb051cd1be94 .cell .markdown}
 ### Classification Report
-:::
 
-::: {#f97a42bc-ab33-4c14-bd69-138bac6bc904 .cell .code execution_count="46"}
 ``` python
 target_names = ['Predicted would not leave', 'Predicted would leave']
 classification_rep = classification_report(y_test, y_pred, target_names=target_names)
@@ -955,7 +799,6 @@ classification_rep = classification_report(y_test, y_pred, target_names=target_n
 print(classification_rep)
 ```
 
-::: {.output .stream .stdout}
                                precision    recall  f1-score   support
 
     Predicted would not leave       0.87      0.97      0.92      2321
@@ -964,10 +807,7 @@ print(classification_rep)
                      accuracy                           0.85      2792
                     macro avg       0.76      0.63      0.66      2792
                  weighted avg       0.83      0.85      0.83      2792
-:::
-:::
 
-::: {#e41d8403-9ea1-40f2-879a-0b37905939b0 .cell .markdown}
 Although the model has an 84% **Accuracy**, it does not accurately
 depict the situation. In terms of **Precision**, **Recall**, and
 **F1-score**, our model fared well in predicting if an employee would
@@ -977,9 +817,7 @@ skewed toward those who are still employed by the company, with minimal
 information collected about those who have left. Bias towards majority
 samples often leads to poor predictive performance for minority samples
 where data is sparse.
-:::
 
-::: {#91799a63-2ffe-444b-b590-bebb785454b5 .cell .markdown}
 ### Random Forests
 
 The random forest algorithm is a machine learning technique that we will
@@ -989,9 +827,7 @@ outliers because the random forest technique is far more reliable than
 general logistic regression and outliers don\'t affect its results.
 Since the `Department` column has the lowest correlation with employee
 attrition, we will just be removing that column.
-:::
 
-::: {#bc0ee980-9beb-4fcb-91ee-0195cf3c1611 .cell .code execution_count="49"}
 ``` python
 df0['salary'] = label_encoder.fit_transform(df0['salary'])
 df_rf = df0.copy()
@@ -1000,9 +836,6 @@ X = df_rf.drop(columns=[ 'Department', 'left'])
 
 X.head()
 ```
-
-::: {.output .execute_result execution_count="49"}
-```{=html}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1090,41 +923,25 @@ X.head()
   </tbody>
 </table>
 </div>
-```
-:::
-:::
 
-::: {#48eb3eb1-bd75-464f-a8d2-f3724a89dfb1 .cell .markdown}
-### Train-Test Split {#train-test-split}
+### Train-Test Split
 
 The dataset was split into training and testing sets to ensure robust
 model evaluation. We are using 75% of the data for training and 25% for
 testing. And we will have a n_estimators of 60 for our
 RandomForestClassifier.
-:::
 
-::: {#03ca7d2a-a59a-4e52-b807-be5ce039738e .cell .code execution_count="51"}
 ``` python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y)
 rf = RandomForestClassifier(n_estimators = 60)
 rf.fit(X_train, y_train)
 ```
 
-::: {.output .execute_result execution_count="51"}
-```{=html}
-<style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(n_estimators=60)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(n_estimators=60)</pre></div></div></div></div></div>
-```
-:::
-:::
-
-::: {#fea2fe96-9a73-4f44-b792-a9953a4abe22 .cell .markdown}
-### Confusion Matrix {#confusion-matrix}
+### Confusion Matrix
 
 Next, we will plot a confusion matrix for our model using our test
 dataset to observe its performance.
-:::
 
-::: {#108d84b9-43f6-43c3-bef1-0d4de7707083 .cell .code execution_count="53"}
 ``` python
 y_pred = rf.predict(X_test)
 rf_cm = confusion_matrix(y_test, y_pred, labels=rf.classes_)
@@ -1132,13 +949,8 @@ ConfusionMatrixDisplay(confusion_matrix=rf_cm, display_labels=rf.classes_).plot(
 
 plt.show()
 ```
+<img width="516" height="432" alt="25cd65cd32a1aa2d1c619170de4e5b2d9dadab5a" src="https://github.com/user-attachments/assets/403c2d3a-cf5a-4a68-91c9-259002b4d302" />
 
-::: {.output .display_data}
-![](25cd65cd32a1aa2d1c619170de4e5b2d9dadab5a.png)
-:::
-:::
-
-::: {#93b907a9-3a06-45a9-9e8b-68b73afe19e1 .cell .markdown}
 **True Positive:** 2497
 **False Negative:** 3
 **False Positive:** 36
@@ -1147,13 +959,9 @@ plt.show()
 We can observe from the above figure our random forest model worked
 really well much better than our logistic regression model. We will use
 the classification report to see how well did it perfored.
-:::
 
-::: {#cf5438d6-e5a4-4baa-8cae-3c476ae1b190 .cell .markdown}
-### Classification Report {#classification-report}
-:::
+### Classification Report
 
-::: {#44912c05-7b84-477f-b29c-ed786b7d1c69 .cell .code execution_count="56"}
 ``` python
 target_names = ['Predicted would not leave', 'Predicted would leave']
 classification_rep = classification_report(y_test, y_pred, target_names=target_names)
@@ -1161,7 +969,6 @@ classification_rep = classification_report(y_test, y_pred, target_names=target_n
 print(classification_rep)
 ```
 
-::: {.output .stream .stdout}
                                precision    recall  f1-score   support
 
     Predicted would not leave       0.99      1.00      0.99      2500
@@ -1170,10 +977,7 @@ print(classification_rep)
                      accuracy                           0.99      2998
                     macro avg       0.99      0.97      0.98      2998
                  weighted avg       0.99      0.99      0.99      2998
-:::
-:::
 
-::: {#2fbbd4f8-8faa-4658-a2e2-6c98796de82c .cell .markdown}
 From the classification report we found for the \"would not leave\"
 class, the model achieved a precision of 0.98, indicating that 98% of
 the predictions for this class were accurate. The recall for this class
@@ -1197,17 +1001,13 @@ of the biased dataset. Overall, the model\'s metrics demonstrate
 excellent performance, with a minor gap in recall for the minority
 \"would leave\" class. A balanced dataset will help improve the model\'s
 sensitivity for this group.
-:::
 
-::: {#7243ed1c-fcb0-4787-a710-3e3a89f97efe .cell .markdown}
 ### Feature Importance
 
 Feature importance will help us to identify which features have the
 greatest influence on the model\'s predictions, providing insights into
 how the model makes its decisions.
-:::
 
-::: {#a2cc9746-6579-4604-8cba-ce290d600ca4 .cell .code execution_count="59"}
 ``` python
 feature_names = X_train.columns
 importances = rf.feature_importances_
@@ -1221,13 +1021,8 @@ plt.yticks(range(X.shape[1]), np.array(feature_names)[indices], rotation=0)
 plt.tight_layout()
 plt.show()
 ```
+<img width="989" height="589" alt="72ffa9c32f25c3ce96539b8b4bcfb8471390a625" src="https://github.com/user-attachments/assets/690725f1-20c5-4293-9c9e-a7f13bf0c3ca" />
 
-::: {.output .display_data}
-![](72ffa9c32f25c3ce96539b8b4bcfb8471390a625.png)
-:::
-:::
-
-::: {#cb777bdf-ea18-40b1-a882-a3a5e426568b .cell .markdown}
 The feature importance chart reveals key insights into the factors
 influencing employee retention. The `satisfaction_level` emerges as the
 most significant predictor, contributing almost 40% of the
@@ -1255,9 +1050,7 @@ little direct influence in our model. This suggests that promotions by
 themselves could not have a big impact on retention unless they are
 paired with other factors like working hours, pay scales, or working
 conditions.
-:::
 
-::: {#b1961854-ac32-43ba-ab3b-56fc39db9003 .cell .markdown}
 ## Conclusion
 
 To effectively address employee turnover, the senior leadership team
@@ -1266,34 +1059,34 @@ influential factor in employee retention. Given the interconnected
 nature of satisfaction with variables like salary, workload, and
 promotions, a multi-faceted strategy is recommended.
 
-#### 1. Enhance Job Satisfaction {#1-enhance-job-satisfaction}
+#### 1. Enhance Job Satisfaction
 
 Conduct regular employee surveys to assess satisfaction levels and
 identify areas for improvement. This will allow the company to
 proactively address concerns before they escalate into turnover
 decisions.
 
-#### 2. Review Compensation and Promotions {#2-review-compensation-and-promotions}
+#### 2. Review Compensation and Promotions
 
 Ensure that salary packages are competitive and aligned with industry
 standards. Additionally, create clear and attainable career progression
 paths, including regular promotions and recognition, to enhance employee
 satisfaction and loyalty.
 
-#### 3. Workload Management {#3-workload-management}
+#### 3. Workload Management
 
 Address issues related to high \"average monthly hours\" and project
 overload by distributing tasks more evenly and providing adequate
 resources for teams. Offering flexible working hours or remote work
 options could also help alleviate burnout.
 
-#### 4. Career Development Opportunities {#4-career-development-opportunities}
+#### 4. Career Development Opportunities
 
 Invest in employee development programs, mentorships, and skill-building
 workshops to keep employees engaged and motivated. This also supports
 long-term career growth within the company.
 
-#### 5. Promote Work-Life Balance {#5-promote-work-life-balance}
+#### 5. Promote Work-Life Balance
 
 Encourage a healthy work-life balance through policies that promote
 well-being, such as paid time off, wellness programs, and stress
@@ -1302,4 +1095,3 @@ management initiatives.
 By focusing on these key areas, the company can improve employee
 satisfaction and retention, fostering a more motivated and productive
 workforce.
-:::
