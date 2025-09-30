@@ -6,11 +6,8 @@ Employee attrition, also known as turnover, is a critical concern for companies 
 
 The analysis leverages several logistic regression, machine learning and data visualization techniques to uncover patterns in the data and build a predictive model for employee churn.
 
-::: {#68dd27af-e45e-42f5-835e-802db0a7cd40 .cell .markdown}
 ##### Import packages
-:::
 
-::: {#9b92fb35-d02a-47c0-a5a7-9b002bb00bce .cell .code execution_count="3"}
 ``` python
 import numpy as np
 import pandas as pd
@@ -25,9 +22,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
 ```
-:::
 
-::: {#43ca57f7-28d7-4af2-9e86-fd1ce628fda1 .cell .markdown}
 ## Data Overview
 
 The dataset consists of 10 variables, each representing different
@@ -53,17 +48,13 @@ attributes related to employee performance and demographics:
 -   **salary**: A categorical variable indicating salary level (low,
     medium, or high).
 
-The target variable of interest is `left`, which indicates employee
-attrition.
-:::
+The target variable of interest is `left`, which indicates employee attrition.
 
-::: {#ea2bfc2b-2a00-4d7c-95bc-0d467a179303 .cell .code execution_count="5"}
 ``` python
 df0 = pd.read_csv("HR_comma_sep.csv")
 df0.head()
 ```
 
-::: {.output .execute_result execution_count="5"}
 ```{=html}
 <div>
 <style scoped>
@@ -165,14 +156,9 @@ df0.head()
 </table>
 </div>
 ```
-:::
-:::
 
-::: {#8176ac95-ce66-494b-bf30-55830e3ce636 .cell .markdown}
 #### Overview Of The Dataset
-:::
 
-::: {#ac93c9d8-ff6e-425d-b94e-498c2ccf90ac .cell .code execution_count="7"}
 ``` python
 df0.describe()
 ```
