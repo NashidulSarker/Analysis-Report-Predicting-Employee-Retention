@@ -55,7 +55,6 @@ df0 = pd.read_csv("HR_comma_sep.csv")
 df0.head()
 ```
 
-```{=html}
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -155,7 +154,6 @@ df0.head()
   </tbody>
 </table>
 </div>
-```
 
 #### Overview Of The Dataset
 
